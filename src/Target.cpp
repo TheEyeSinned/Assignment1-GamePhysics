@@ -46,7 +46,7 @@ void Target::m_move()
 
 	//getRigidBody()->velocity += (getRigidBody()->acceleration + gravity) * deltaTime;
 
-	if (isGravityEnabled) {
+	if (!isGravityEnabled) {
 		getRigidBody()->velocity += (getRigidBody()->acceleration + gravity) * deltaTime;
 	}
 	else {

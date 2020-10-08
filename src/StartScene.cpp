@@ -14,6 +14,8 @@ StartScene::~StartScene()
 
 void StartScene::draw()
 {
+	TextureManager::Instance()->draw("background2", 400, 300, 0, 255, true);
+
 	drawDisplayList();
 }
 
@@ -45,8 +47,12 @@ void StartScene::handleEvents()
 
 void StartScene::start()
 {
+	TextureManager::Instance()->load("../Assets/textures/Background2.png", "background2");
+
 	const SDL_Color blue = { 0, 0, 255, 255 };
-	m_pStartLabel = new Label("START SCENE", "Consolas", 80, blue, glm::vec2(400.0f, 40.0f));
+	const SDL_Color red = { 255, 0, 0, 255 };
+
+	m_pStartLabel = new Label("ASSIGNMENT 1", "Consolas", 80, blue, glm::vec2(400.0f, 40.0f));
 	m_pStartLabel->setParent(this);
 	addChild(m_pStartLabel);
 
@@ -54,14 +60,30 @@ void StartScene::start()
 	m_pInstructionsLabel->setParent(this);
 	addChild(m_pInstructionsLabel);
 
+	m_pNamesLabel = new Label("Eisen Enrique", "Consolas", 20, red, glm::vec2(400.0f, 200.0f));
+	m_pNamesLabel->setParent(this);
+	addChild(m_pNamesLabel);
+	m_pNamesLabel = new Label("101244409", "Consolas", 10, red, glm::vec2(400.0f, 215.0f));
+	m_pNamesLabel->setParent(this);
+	addChild(m_pNamesLabel);
 
-	m_pShip = new Ship();
-	m_pShip->getTransform()->position = glm::vec2(400.0f, 300.0f); 
-	addChild(m_pShip); 
+	m_pNamesLabel = new Label("Lizbeth Belanger", "Consolas", 20, red, glm::vec2(200.0f, 200.0f));
+	m_pNamesLabel->setParent(this);
+	addChild(m_pNamesLabel);
+	m_pNamesLabel = new Label("101236324", "Consolas", 10, red, glm::vec2(200.0f, 215.0f));
+	m_pNamesLabel->setParent(this);
+	addChild(m_pNamesLabel);
+
+	m_pNamesLabel = new Label("Abel Moore", "Consolas", 20, red, glm::vec2(600.0f, 200.0f));
+	m_pNamesLabel->setParent(this);
+	addChild(m_pNamesLabel);
+	m_pNamesLabel = new Label("101156682", "Consolas", 10, red, glm::vec2(600.0f, 215.0f));
+	m_pNamesLabel->setParent(this);
+	addChild(m_pNamesLabel);
 
 	// Start Button
 	m_pStartButton = new Button();
-	m_pStartButton->getTransform()->position = glm::vec2(400.0f, 400.0f); 
+	m_pStartButton->getTransform()->position = glm::vec2(400.0f, 500.0f); 
 
 	m_pStartButton->addEventListener(CLICK, [&]()-> void
 	{

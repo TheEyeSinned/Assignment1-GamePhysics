@@ -126,8 +126,8 @@ void PlayScene::start()
 	m_guiTitle = "Play Scene";
 	
 	// Plane Sprite
-	//m_pPlaneSprite = new Plane();
-	//addChild(m_pPlaneSprite);
+	m_pPlane = new Plane();
+	addChild(m_pPlane);
 
 	// Player Sprite
 	m_pPlayer = new Player();
@@ -203,16 +203,23 @@ void PlayScene::GUI_Function() const
 	ImGui::Separator();
 
 	static bool isGravityEnabled = false;
-	if (ImGui::Checkbox("Gravity", &isGravityEnabled)) {
+	if (ImGui::Checkbox("Gravity off", &isGravityEnabled)) {
 		m_pBall->isGravityEnabled = isGravityEnabled;
 	}
 
-	static int xPosPlayer = 300;
-	if (ImGui::SliderInt("Player's X Position", &xPosPlayer, 0, 800)) {
+	static int xPosPlayer = 70;
+	if (ImGui::SliderInt("Player's X Position", &xPosPlayer, 0, 350)) {
 		m_pPlayer->getTransform()->position.x = xPosPlayer;
 		m_pBall->throwPosition = glm::vec2(xPosPlayer, 300);
 	}
-	
+
+	ImGui::Separator();
+
+	static int xPosEnemy = 300;
+	if (ImGui::SliderInt("Plane's X Position", &xPosEnemy, 450, 800)) {
+		m_pPlane->getTransform()->position.x = xPosEnemy;
+	}
+
 	static float velocity[2] = { 0 , 0 };
 	if (ImGui::SliderFloat2("Throw Speed", velocity, 0, 100)) {
 		m_pBall->throwSpeed = glm::vec2(velocity[0], -velocity[1]);

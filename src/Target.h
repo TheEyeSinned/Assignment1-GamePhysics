@@ -20,7 +20,7 @@ public:
 
 	void doThrow();
 
-	float metersPerPixel = 10;
+	float metersPerPixel = 5;
 private:
 	void m_move();
 	void m_checkBounds();
