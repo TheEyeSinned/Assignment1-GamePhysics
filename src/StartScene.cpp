@@ -67,7 +67,7 @@ void StartScene::start()
 	m_pNamesLabel->setParent(this);
 	addChild(m_pNamesLabel);
 
-	m_pNamesLabel = new Label("Lizbeth Belanger", "Consolas", 20, red, glm::vec2(200.0f, 200.0f));
+	m_pNamesLabel = new Label("Lisbeth Belanger", "Consolas", 20, red, glm::vec2(200.0f, 200.0f));
 	m_pNamesLabel->setParent(this);
 	addChild(m_pNamesLabel);
 	m_pNamesLabel = new Label("101236324", "Consolas", 10, red, glm::vec2(200.0f, 215.0f));

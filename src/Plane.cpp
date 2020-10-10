@@ -16,7 +16,7 @@ Plane::Plane()
 	// set frame height
 	setHeight(65);
 
-	getTransform()->position = glm::vec2(700.0f, 300.0f);
+	getTransform()->position = glm::vec2(640.0f, 300.0f);
 	getRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->isColliding = false;

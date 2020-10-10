@@ -17,10 +17,11 @@ public:
 
 	glm::vec2 throwSpeed;
 	glm::vec2 throwPosition;
+	
 
 	void doThrow();
 
-	float metersPerPixel = 5;
+	float metersPerPixel = 1;
 private:
 	void m_move();
 	void m_checkBounds();
