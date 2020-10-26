@@ -23,7 +23,7 @@ public:
 
 	void m_reset();
 
-	float metersPerPixel = 1;
+	float pixelPerMeter = 50;
 private:
 	void m_move();
 	void m_checkBounds();

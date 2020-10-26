@@ -54,7 +54,7 @@ void Target::m_move()
 	getRigidBody()->velocity += getRigidBody()->acceleration * deltaTime;
 	
 
-	getTransform()->position += getRigidBody()->velocity * deltaTime * metersPerPixel;
+	getTransform()->position += getRigidBody()->velocity * deltaTime;
 
 	
 }

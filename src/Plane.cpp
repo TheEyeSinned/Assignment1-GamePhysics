@@ -28,13 +28,13 @@ void Plane::draw()
 {
 	
 	//run
-	Util::DrawLine(glm::vec2(xPosition, yPosition), glm::vec2(run, yPosition), glm::vec4(1.0f, 0, 1.0f, 255));
+	Util::DrawLine(glm::vec2(xPosition, yPosition), glm::vec2(run, yPosition), glm::vec4(0, 0, 0, 255));
 
 	//rise
-	Util::DrawLine(glm::vec2(xPosition, rise), glm::vec2(xPosition, yPosition), glm::vec4(0, 1.0f, 0, 255));
+	Util::DrawLine(glm::vec2(xPosition, rise), glm::vec2(xPosition, yPosition), glm::vec4(0, 0, 0, 255));
 
 	//ramp
-	Util::DrawLine(glm::vec2(xPosition, rise), glm::vec2(run, yPosition), glm::vec4(0, 0, 1.0f, 255));
+	Util::DrawLine(glm::vec2(xPosition, rise), glm::vec2(run, yPosition), glm::vec4(0, 0, 0, 255));
 }
 
 void Plane::update()

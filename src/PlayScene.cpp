@@ -39,7 +39,7 @@ void PlayScene::update()
 
 	direction = glm::vec2(m_pRamp->getRun(), m_pRamp->getYPos());
 
-	m_pBall->getRigidBody()->acceleration = direction;
+	m_pBall->getRigidBody()->acceleration = Util::normalize(direction);
 
 	//totalAccel = 9.8 * sin( calcAngle());
 
