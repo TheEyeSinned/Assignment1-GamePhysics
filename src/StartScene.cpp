@@ -52,7 +52,7 @@ void StartScene::start()
 	const SDL_Color blue = { 0, 0, 255, 255 };
 	const SDL_Color red = { 255, 0, 0, 255 };
 
-	m_pStartLabel = new Label("ASSIGNMENT 1", "Consolas", 80, blue, glm::vec2(400.0f, 40.0f));
+	m_pStartLabel = new Label("ASSIGNMENT 2", "Consolas", 80, blue, glm::vec2(400.0f, 40.0f));
 	m_pStartLabel->setParent(this);
 	addChild(m_pStartLabel);
 
