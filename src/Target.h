@@ -21,11 +21,13 @@ public:
 
 	void doThrow();
 
+	void m_reset();
+
 	float metersPerPixel = 1;
 private:
 	void m_move();
 	void m_checkBounds();
-	void m_reset();
+	
 };
 
 

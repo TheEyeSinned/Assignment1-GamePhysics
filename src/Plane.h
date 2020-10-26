@@ -15,8 +15,23 @@ public:
 	virtual void update() override;
 	virtual void clean() override;
 
+	int getRise() { return rise; }
+	int getRun() { return run; }
+
+	int getXPos() { return xPosition; }
+	int getYPos() { return yPosition; }
+
+	int rise = 150;
+	int run = 350;
+	int xPosition = 100;
+	int yPosition = 300;
+
+	
 private:
-	void m_buildAnimations();
+	
+	
+	
+
 };
 
 #endif /* defined (__PLANE__) */

@@ -74,10 +74,10 @@ void StartScene::start()
 	m_pNamesLabel->setParent(this);
 	addChild(m_pNamesLabel);
 
-	m_pNamesLabel = new Label("Abel Moore", "Consolas", 20, red, glm::vec2(600.0f, 200.0f));
+	m_pNamesLabel = new Label("Alex Dine", "Consolas", 20, red, glm::vec2(600.0f, 200.0f));
 	m_pNamesLabel->setParent(this);
 	addChild(m_pNamesLabel);
-	m_pNamesLabel = new Label("101156682", "Consolas", 10, red, glm::vec2(600.0f, 215.0f));
+	m_pNamesLabel = new Label("101264627", "Consolas", 10, red, glm::vec2(600.0f, 215.0f));
 	m_pNamesLabel->setParent(this);
 	addChild(m_pNamesLabel);
 

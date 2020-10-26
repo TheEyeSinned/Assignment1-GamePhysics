@@ -1,6 +1,9 @@
 #include "PlayScene.h"
 #include "Game.h"
 #include "EventManager.h"
+#include "Util.h"
+#include <iostream>
+using namespace std;
 
 // required for IMGUI
 #include "imgui.h"
@@ -31,6 +34,19 @@ void PlayScene::draw()
 
 void PlayScene::update()
 {
+	
+	m_pBall->getTransform()->rotation = calcAngle();
+
+	direction = glm::vec2(m_pRamp->getRun(), m_pRamp->getYPos());
+
+	m_pBall->getRigidBody()->acceleration = direction;
+
+	//totalAccel = 9.8 * sin( calcAngle());
+
+	//m_pBall->getRigidBody()->acceleration = glm::vec2(totalAccel * cos(calcAngle()),totalAccel * sin(calcAngle()));
+
+	//m_pBall->update();
+
 	updateDisplayList();
 }
 
@@ -126,8 +142,8 @@ void PlayScene::start()
 	m_guiTitle = "Play Scene";
 	
 	// Plane Sprite
-	m_pPlane = new Plane();
-	addChild(m_pPlane);
+	m_pRamp = new Plane();
+	addChild(m_pRamp);
 
 	// Player Sprite
 	m_pPlayer = new Player();
@@ -137,6 +153,8 @@ void PlayScene::start()
 	//Ball
 	m_pBall = new Target();
 	addChild(m_pBall);
+
+	
 
 	// Back Button
 	m_pBackButton = new Button("../Assets/textures/backButton.png", "backButton", BACK_BUTTON);
@@ -180,8 +198,9 @@ void PlayScene::start()
 	addChild(m_pNextButton);
 
 	m_pActivateButton = new Button("../Assets/textures/activateButton.png", "activateButton", ACTIVATE_BUTTON);
-	m_pBall->throwSpeed = glm::vec2(40, -60);
-	m_pBall->throwPosition = glm::vec2(155, 300);
+	
+	m_pBall->throwPosition = glm::vec2(150, 100);
+	m_pBall->throwSpeed = glm::vec2(0, 0);
 	m_pActivateButton->getTransform()->position = glm::vec2(400.0f, 500.0f);
 	m_pActivateButton->addEventListener(CLICK, [&]()-> void
 	{
@@ -223,6 +242,9 @@ void PlayScene::GUI_Function() const
 		m_pBall->doThrow();
 	}
 
+	if (ImGui::Button("Reset")) {
+		m_pBall->m_reset();
+	}
 	ImGui::Separator();
 
 	static bool isGravityEnabled = false;
@@ -230,23 +252,52 @@ void PlayScene::GUI_Function() const
 		m_pBall->isGravityEnabled = isGravityEnabled;
 	}
 
-	static int xPosPlayer = 155;
-	if (ImGui::SliderInt("Player's X Position", &xPosPlayer, 0, 350)) {
-		m_pPlayer->getTransform()->position.x = xPosPlayer;
-		m_pBall->throwPosition = glm::vec2(xPosPlayer, 300);
+	ImGui::Separator();
+
+	static int xRise = 155;
+	if (ImGui::SliderInt("Rise", &xRise, 10, m_pRamp->yPosition - 50)) {
+		m_pRamp->rise = xRise;
+		m_pBall->throwPosition.y = xRise - 15;
+	}
+
+	static int xRun = 155;
+	if (ImGui::SliderInt("Run", &xRun, m_pRamp->xPosition + 50, 750 )) {
+		m_pRamp->run = xRun;
+
+	}
+
+	static int xPosition = 155;
+	if (ImGui::SliderInt("X Position", &xPosition, 10, m_pRamp->run - 50)) {
+		m_pRamp->xPosition = xPosition;
+		m_pBall->throwPosition.x = xPosition + (m_pBall->getWidth()/2);
+
+	}
+
+	static int yPosition = 155;
+	if (ImGui::SliderInt("Y Position", &yPosition, m_pRamp->rise + 50, 550)) {
+		m_pRamp->yPosition = yPosition;
+
 	}
 
 	ImGui::Separator();
 
-	static int xPosEnemy = 640;
-	if (ImGui::SliderInt("Plane's X Position", &xPosEnemy, 450, 800)) {
-		m_pPlane->getTransform()->position.x = xPosEnemy;
+	static int Mmass = 155;
+	if (ImGui::SliderInt("Mass", &Mmass, 0, 500)) {
+		m_pBall->getRigidBody()->mass = Mmass;
+
 	}
 
-	static float velocity[2] = { 40 , 60 };
+
+
+	/*static int xPosEnemy = 640;
+	if (ImGui::SliderInt("Plane's X Position", &xPosEnemy, 450, 800)) {
+		m_pPlane->getTransform()->position.x = xPosEnemy;
+	}*/
+
+	/*static float velocity[2] = { 40 , 60 };
 	if (ImGui::SliderFloat2("Throw Speed", velocity, 0, 100)) {
 		m_pBall->throwSpeed = glm::vec2(velocity[0], -velocity[1]);
-	}
+	}*/
 
 	ImGui::End();
 	ImGui::EndFrame();
@@ -255,4 +306,13 @@ void PlayScene::GUI_Function() const
 	ImGui::Render();
 	ImGuiSDL::Render(ImGui::GetDrawData());
 	ImGui::StyleColorsDark();
+}
+
+float PlayScene::calcAngle() 
+{
+	int sideLength = m_pRamp->getRun() - m_pRamp->getXPos();
+	int sideWidth = m_pRamp->getYPos() - m_pRamp->getRise();
+	int sideHype = (sideLength * sideLength) + (sideWidth * sideWidth);
+	// float angle = Util::angle(glm::vec2(m_pRamp->getXPos(), m_pRamp->getRise()), glm::vec2(m_pRamp->getRun(), m_pRamp->getYPos()));
+	return acos(((sideWidth * sideWidth) + sideHype - (sideLength * sideLength))/(2*sideWidth*(sqrt(sideHype)))) * -57.29578f;
 }

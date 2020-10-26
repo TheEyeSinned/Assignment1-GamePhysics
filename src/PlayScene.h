@@ -22,6 +22,11 @@ public:
 	virtual void handleEvents() override;
 	virtual void start() override;
 
+	float calcAngle();
+	
+	glm::vec2 direction;
+
+	float totalAccel;
 
 
 private:
@@ -31,7 +36,9 @@ private:
 	
 	glm::vec2 m_mousePosition;
 
-	Plane* m_pPlane;
+	
+	
+	Plane* m_pRamp;
 	Target* m_pBall;
 	Player* m_pPlayer;
 	bool m_playerFacingRight;

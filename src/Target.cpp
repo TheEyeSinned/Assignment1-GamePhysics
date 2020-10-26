@@ -9,9 +9,12 @@ Target::Target()
 	const auto size = TextureManager::Instance()->getTextureSize("circle");
 	setWidth(size.x);
 	setHeight(size.y);
-	getTransform()->position = glm::vec2(155.0f, 300.0f);
+	getTransform()->position = glm::vec2(150.0f, 100.0f);
 	getRigidBody()->velocity = glm::vec2(0, 0);
 	getRigidBody()->isColliding = false;
+	getRigidBody()->mass = 12.8;
+	getTransform()->rotation = 0;
+	
 
 	setType(TARGET);
 }
@@ -26,7 +29,7 @@ void Target::draw()
 	const auto y = getTransform()->position.y;
 
 	// draw the target
-	TextureManager::Instance()->draw("circle", x, y, 0, 255, true);
+	TextureManager::Instance()->draw("circle", x, y, getTransform()->rotation, 255, true);
 }
 
 void Target::update()
@@ -46,14 +49,14 @@ void Target::m_move()
 
 	//getRigidBody()->velocity += (getRigidBody()->acceleration + gravity) * deltaTime;
 
-	if (!isGravityEnabled) {
-		getRigidBody()->velocity += (getRigidBody()->acceleration + gravity) * deltaTime;
-	}
-	else {
-		getRigidBody()->velocity += getRigidBody()->acceleration * deltaTime;
-	}
+	
+
+	getRigidBody()->velocity += getRigidBody()->acceleration * deltaTime;
+	
 
 	getTransform()->position += getRigidBody()->velocity * deltaTime * metersPerPixel;
+
+	
 }
 
 void Target::m_checkBounds()
@@ -62,6 +65,8 @@ void Target::m_checkBounds()
 
 void Target::m_reset()
 {
+	getTransform()->position = throwPosition;
+	getRigidBody()->velocity = glm::vec2(0, 0);
 }
 
 void Target::doThrow()

@@ -35,7 +35,7 @@ void Player::draw()
 	const auto y = getTransform()->position.y;
 
 	// draw the player according to animation state
-	switch(m_currentAnimationState)
+	/*switch(m_currentAnimationState)
 	{
 	case PLAYER_IDLE_RIGHT:
 		TextureManager::Instance()->playAnimation("spritesheet", getAnimation("idle"),
@@ -55,7 +55,7 @@ void Player::draw()
 		break;
 	default:
 		break;
-	}
+	}*/
 	
 }
 
